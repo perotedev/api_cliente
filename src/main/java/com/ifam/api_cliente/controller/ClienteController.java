@@ -2,6 +2,8 @@ package com.ifam.api_cliente.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.ifam.api_cliente.domain.entity.Cliente;
 import com.ifam.api_cliente.domain.service.ClienteService;
 
@@ -15,13 +17,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
     ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService){
+        this.clienteService = clienteService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getClientes() {
@@ -29,21 +32,21 @@ public class ClienteController {
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
-    @GetMapping({"{id}"})
+    @GetMapping({"/{id}"})
     public ResponseEntity<Cliente> getClienteById(@PathVariable Long id){
         return new ResponseEntity<Cliente>(this.clienteService.getClienteById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> saveCliente(@Valid @RequestBody Cliente cliente){
         this.clienteService.saveCliente(cliente);
         return new ResponseEntity<Cliente>(this.clienteService.getClienteById(cliente.getId()), HttpStatus.CREATED);
     } 
 
-    @PutMapping
-    public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente){
-        this.clienteService.updateCliente(cliente.getId(), cliente);
-        return new ResponseEntity<Cliente>(this.clienteService.getClienteById(cliente.getId()), HttpStatus.OK);
+    @PutMapping("{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente){
+        this.clienteService.updateCliente(id, cliente);
+        return new ResponseEntity<Cliente>(this.clienteService.getClienteById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

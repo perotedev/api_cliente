@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +43,6 @@ public class Cliente {
     String sexo;
 
     @Column(name = "data_nascimento")
-    @NotBlank(message = "Data de nascimento é obrigatório")
+    @NotNull(message = "Data de Nascimento é obrigatório")
     Date data_nascimento;
 }
