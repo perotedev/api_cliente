@@ -2,10 +2,8 @@ package com.ifam.api_cliente.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.ifam.api_cliente.domain.entity.Cliente;
 import com.ifam.api_cliente.domain.repository.ClienteRepository;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,16 +32,14 @@ public class ClienteService implements ClienteServiceInterface {
     }
 
     @Override
-    public Cliente updateCliente(Long id, Cliente cliente) {
+    public void updateCliente(Long id, Cliente cliente) {
         Cliente clienteFound = this.clienteRepository.findById(id).get();
         if (!this.clienteRepository.findById(id).isEmpty()){
             clienteFound.setNome(cliente.getNome());
-            clienteFound.setCpf(cliente.getCpf());
             clienteFound.setSexo(cliente.getSexo());
             clienteFound.setData_nascimento(cliente.getData_nascimento());
             this.clienteRepository.save(clienteFound);
         }
-        return clienteFound;
     }
 
     @Override

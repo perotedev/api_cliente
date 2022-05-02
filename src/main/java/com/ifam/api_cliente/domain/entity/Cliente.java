@@ -8,10 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +28,10 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "cpf")
+    @Column(updatable = false, name = "cpf", unique = true)
     @NotBlank(message = "CPF é obrigatório")
     @Length(message = "No máximo 11 caracteres", max = 11)
+    @CPF
     String cpf;
 
     @Column(name = "nome")
@@ -40,6 +42,7 @@ public class Cliente {
     @Column(name = "sexo")
     @NotBlank(message = "Sexo é obrigatório")
     @Length(message = "No 1 caracter", max = 1)
+    @Pattern(regexp = "[FM]")
     String sexo;
 
     @Column(name = "data_nascimento")

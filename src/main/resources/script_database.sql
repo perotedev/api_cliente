@@ -14,5 +14,6 @@ CREATE TABLE cliente(
     nome varchar(50) NOT NULL,
     sexo char NOT NULL,
     data_nascimento date NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE(cpf)
 );

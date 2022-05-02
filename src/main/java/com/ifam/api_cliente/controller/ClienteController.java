@@ -1,12 +1,9 @@
 package com.ifam.api_cliente.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import com.ifam.api_cliente.domain.entity.Cliente;
 import com.ifam.api_cliente.domain.service.ClienteService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +30,7 @@ public class ClienteController {
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id){
+    public ResponseEntity<Cliente> getClienteById(@Valid @PathVariable Long id){
         return new ResponseEntity<Cliente>(this.clienteService.getClienteById(id), HttpStatus.OK);
     }
 
@@ -44,13 +41,13 @@ public class ClienteController {
     } 
 
     @PutMapping("{id}")
-    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> updateCliente(@Valid @PathVariable Long id, @RequestBody Cliente cliente){
         this.clienteService.updateCliente(id, cliente);
         return new ResponseEntity<Cliente>(this.clienteService.getClienteById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id){
+    public ResponseEntity<Cliente> deleteCliente(@Valid @PathVariable Long id){
         this.clienteService.deleteCliente(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

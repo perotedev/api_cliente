@@ -7,6 +7,6 @@ public interface ClienteServiceInterface {
     List<Cliente> getClientes();
     Cliente getClienteById(Long id);
     Cliente saveCliente(Cliente cliente);
-    Cliente updateCliente(Long id, Cliente cliente);
+    void updateCliente(Long id, Cliente cliente);
     void deleteCliente(Long id);
 }
