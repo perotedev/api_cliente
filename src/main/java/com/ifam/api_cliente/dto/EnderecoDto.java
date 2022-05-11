@@ -1,6 +1,5 @@
 package com.ifam.api_cliente.dto;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteDto {
+public class EnderecoDto {
     Long id;
-    String nome;
-    Date nascimento;
-    String sexo;
-    String cpf;  
-    Integer enderecoId;
+    String cep;
+    String rua;
+    String uf;
+    String cidade;
+    String bairro;
+    int numero; 
 }
