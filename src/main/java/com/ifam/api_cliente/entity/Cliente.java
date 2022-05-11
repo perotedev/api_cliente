@@ -1,14 +1,22 @@
-package com.ifam.api_cliente.domain.entity;
+package com.ifam.api_cliente.entity;
 
 import java.sql.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -17,14 +25,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Table(name = "cliente")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cliente")
 public class Cliente {
     @Id
-    @Column(updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
@@ -36,8 +43,11 @@ public class Cliente {
 
     @Column(name = "nome")
     @NotBlank(message = "Nome é obrigatório")
-    @Length(message = "No máximo 100 caracteres", max = 100)
+    @Length(message = "Nome com no máximo 50 caracteres", max = 50)
     String nome;
+
+    @Column(name = "nascimento")
+    Date nascimento;
 
     @Column(name = "sexo")
     @NotBlank(message = "Sexo é obrigatório")
@@ -45,7 +55,8 @@ public class Cliente {
     @Pattern(regexp = "[FM]")
     String sexo;
 
-    @Column(name = "data_nascimento")
-    @NotNull(message = "Data de Nascimento é obrigatório")
-    Date data_nascimento;
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "enderecoId")
+	Endereco endereco;
+
 }
