@@ -11,15 +11,15 @@ USE db_cliente;
 
 -- Criar a tabela: cliente
 CREATE TABLE cliente(
-    id int AUTO_INCREMENT NOT NULL,
+    id int AUTO_INCREMENT,
     id_endereco int,
     nome varchar(50) NOT NULL,
     cpf varchar(11) NOT NULL,
     sexo varchar(1) NOT NULL,
     nascimento date NOT NULL,
-    PRIMARY KEY (id)
-)
-ALTER TABLE cliente MODIFY description TEXT CHARACTER SET utf8;
+    enderecoId int NOT NULL,
+    PRIMARY KEY (id) 
+);
 
 CREATE TABLE endereco(
     id int AUTO_INCREMENT ,
@@ -30,9 +30,7 @@ CREATE TABLE endereco(
     cidade varchar(50) NOT NULL,
     uf varchar(2) NOT NULL,
     PRIMARY KEY (id)
-)
-
-ALTER TABLE endereco MODIFY description TEXT CHARACTER SET utf8;
+);
 
 ALTER TABLE cliente ADD CONSTRAINT FK_EnderecoId FOREIGN KEY (enderecoId) REFERENCES endereco(id) ON DELETE RESTRICT ON UPDATE CASCADE;
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -50,4 +51,7 @@ public class Endereco {
   @NotBlank(message = "UF é obrigatório")
   @Length(message = "UF com no máximo 2 caracteres", max = 2)
   String uf;
+
+  @OneToOne(mappedBy = "endereco")
+  private Cliente cliente;
 }
