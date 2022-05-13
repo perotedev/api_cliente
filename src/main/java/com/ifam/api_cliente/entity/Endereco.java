@@ -54,6 +54,6 @@ public class Endereco {
   @Length(message = "UF com no máximo 2 caracteres", max = 2)
   String uf;
 
-  // @OneToOne(mappedBy = "cliente")
-  // Cliente cliente;
+  @OneToOne(mappedBy = "endereco")
+  Cliente cliente;
 }
