@@ -9,8 +9,6 @@ import com.ifam.api_cliente.dto.ClienteDto;
 import com.ifam.api_cliente.entity.Cliente;
 import com.ifam.api_cliente.entity.Endereco;
 import com.ifam.api_cliente.service.ClienteService;
-import com.ifam.api_cliente.service.EnderecoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,19 +29,11 @@ public class ClienteController {
 
   @Autowired
   private ClienteService clienteService;
-  private EnderecoService enderecoService;
 
   @PostMapping // http://localhost:8080/user/
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseDto saveCliente( @RequestBody Cliente cliente) {
-    ResponseDto responseEndereco = enderecoService.saveEndereco(cliente.getEndereco());
-    return responseEndereco;
-    // if (responseEndereco.getId() != null){
-    //   Cliente newCliente = cliente;
-    //   newCliente.setEnderecoId(responseEndereco.getId());
-    //   return clienteService.saveCliente(newCliente);
-    // } else {
-    // }
+  public ResponseDto saveCliente(@Valid @RequestBody Cliente cliente) {
+    return clienteService.saveCliente(cliente);
   }
 
   @GetMapping(value = "/list") // http://localhost:8080/user/list

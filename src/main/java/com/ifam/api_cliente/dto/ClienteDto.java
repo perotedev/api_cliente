@@ -14,5 +14,5 @@ public class ClienteDto {
     Date nascimento;
     String sexo;
     String cpf;  
-    Integer enderecoId;
+    EnderecoDto endereco;
 }
